@@ -8,9 +8,14 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    private Controller mainController;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("contacts.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("contacts.fxml"));
+        Parent root = fxmlLoader.load();
+        this.mainController = fxmlLoader.getController();
         primaryStage.setTitle("Contacts");
         primaryStage.setScene(new Scene(root, 975, 575));
         primaryStage.show();
@@ -19,5 +24,10 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Override
+    public void stop() throws Exception {
+        this.mainController.getContactData().saveContacts();
     }
 }

@@ -2,35 +2,48 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.GridPane?>
-<GridPane fx:controller="contacts.Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" >
-    <TableView fx:id="contacts"
-               GridPane.columnIndex="0"
-               GridPane.rowIndex="0"
-               GridPane.columnSpan="1"
-               GridPane.hgrow="ALWAYS"
-               GridPane.vgrow="ALWAYS">
-        <columns>
-            <TableColumn fx:id="firstName" text="First Name">
-                <cellValueFactory>
-                    <PropertyValueFactory property="firstName" />
-                </cellValueFactory>
-            </TableColumn>
-            <TableColumn fx:id="lastName" text="Last Name">
-                <cellValueFactory>
-                    <PropertyValueFactory property="lastName" />
-                </cellValueFactory>
-            </TableColumn>
-            <TableColumn fx:id="phoneNumber" text="Phone Number">
-                <cellValueFactory>
-                    <PropertyValueFactory property="phoneNumber" />
-                </cellValueFactory>
-            </TableColumn>
-            <TableColumn fx:id="notes" text="Notes">
-                <cellValueFactory>
-                    <PropertyValueFactory property="notes" />
-                </cellValueFactory>
-            </TableColumn>
-        </columns>
-    </TableView>
-</GridPane>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<BorderPane fx:id="borderPane" fx:controller="contacts.Controller"
+            xmlns:fx="http://javafx.com/fxml" >
+    <top>
+        <VBox>
+            <MenuBar>
+                <Menu text="File">
+                    <MenuItem text="Add" onAction="#showAddDialog"/>
+                    <MenuItem text="Edit" />
+                    <MenuItem text="Delete" />
+                </Menu>
+            </MenuBar>
+        </VBox>
+    </top>
+    <center>
+        <TableView fx:id="contacts">
+            <columns>
+                <TableColumn fx:id="firstName" text="First Name">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="firstName" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="lastName" text="Last Name">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="lastName" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="phoneNumber" text="Phone Number">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="phoneNumber" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="notes" text="Notes">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="notes" />
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+    </center>
+</BorderPane>

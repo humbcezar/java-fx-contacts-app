@@ -42,6 +42,17 @@ public class ContactData {
 
     // *** Add methods to add/delete/access contacts here ***
 
+    public void addContact(String firstName, String lastName, String phoneNumber, String notes) {
+        contacts.add(
+            new Contact(
+                firstName,
+                lastName,
+                phoneNumber,
+                notes
+            )
+        );
+    }
+
     public void loadContacts() {
         try {
             // First, create a new XMLInputFactory
