@@ -3,10 +3,7 @@ package contacts;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
@@ -36,6 +33,7 @@ public class Controller implements Initializable {
         contactData.loadContacts();
         contacts.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         contacts.setItems(contactData.getContacts());
+        contacts.getSelectionModel().select(0);
     }
 
     public void showAddDialog() {
@@ -59,7 +57,22 @@ public class Controller implements Initializable {
         }
     }
 
+    public void showDeleteDialog() {
+        Alert confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationDialog.initOwner(borderPane.getScene().getWindow());
+        confirmationDialog.setTitle("Delete contact");
+        confirmationDialog.setContentText("Are you sure you want to delete the selected contact?");
+        confirmationDialog.getDialogPane().setMinWidth(borderPane.getScene().getWindow().getWidth() / 2);
+        Optional<ButtonType> result = confirmationDialog.showAndWait();
+        Contact selected = contacts.getSelectionModel().getSelectedItem();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            contactData.deleteContact(selected);
+        }
+    }
+
     public ContactData getContactData() {
         return contactData;
     }
+
 }

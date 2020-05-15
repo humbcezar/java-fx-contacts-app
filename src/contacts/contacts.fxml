@@ -15,7 +15,7 @@
                 <Menu text="File">
                     <MenuItem text="Add" onAction="#showAddDialog"/>
                     <MenuItem text="Edit" />
-                    <MenuItem text="Delete" />
+                    <MenuItem text="Delete" onAction="#showDeleteDialog"/>
                 </Menu>
             </MenuBar>
         </VBox>

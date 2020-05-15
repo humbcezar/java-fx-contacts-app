@@ -53,6 +53,10 @@ public class ContactData {
         );
     }
 
+    public void deleteContact(Contact selected) {
+        contacts.remove(selected);
+    }
+
     public void loadContacts() {
         try {
             // First, create a new XMLInputFactory
