@@ -1,5 +1,6 @@
 package contacts;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -54,6 +55,34 @@ public class Controller implements Initializable {
         if (result.isPresent() && result.get() == ButtonType.OK) {
             DialogController dialogController = fxmlLoader.getController();
             dialogController.addContact(this.contactData);
+        }
+    }
+
+    public void showEditDialog() {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initOwner(borderPane.getScene().getWindow());
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("addDialog.fxml"));
+        try {
+            dialog.getDialogPane().setContent(fxmlLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+        Contact selected = contacts.getSelectionModel().getSelectedItem();
+        DialogController dialogController = fxmlLoader.getController();
+
+        dialogController.getFirstName().setText(selected.getFirstName());
+        dialogController.getLastName().setText(selected.getLastName());
+        dialogController.getPhoneNumber().setText(selected.getPhoneNumber());
+        dialogController.getNotes().setText(selected.getNotes());
+
+        Optional<ButtonType> result = dialog.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            dialogController.editContact(selected);
+            contacts.refresh();
         }
     }
 

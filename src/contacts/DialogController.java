@@ -5,13 +5,30 @@ import javafx.scene.control.TextField;
 
 public class DialogController {
     @FXML
-    public TextField firstName;
+    private TextField firstName;
     @FXML
-    public TextField lastName;
+    private TextField lastName;
     @FXML
-    public TextField phoneNumber;
+    private TextField phoneNumber;
     @FXML
-    public TextField notes;
+    private TextField notes;
+
+    public TextField getFirstName() {
+        return firstName;
+    }
+
+    public TextField getLastName() {
+        return lastName;
+    }
+
+    public TextField getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public TextField getNotes() {
+        return notes;
+    }
+
 
     public void addContact(ContactData contactData) {
         contactData.addContact(
@@ -20,5 +37,12 @@ public class DialogController {
             phoneNumber.getText().trim(),
             notes.getText().trim()
         );
+    }
+
+    public void editContact(Contact contact) {
+        contact.setFirstName(firstName.getText().trim());
+        contact.setLastName(lastName.getText().trim());
+        contact.setPhoneNumber(phoneNumber.getText().trim());
+        contact.setNotes(notes.getText().trim());
     }
 }
